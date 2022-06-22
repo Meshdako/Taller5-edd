@@ -1,5 +1,6 @@
 #include <iostream>
-#include <string.h>
+#include <cstring>
+#include <string>
 
 #include "Nodo.h"
 #include "Nodo.cpp"
@@ -54,7 +55,7 @@ void Agregar(AB &Arbol_Binario, string Palabra_Ingresada)
             char * cstr2 = new char[Palabra_Ingresada.length() + 1];
             strcpy(cstr2, Palabra_Ingresada.c_str());
 
-            if(strcmp(cstr2, cstr1) > 0){
+            if(strcmp(cstr2, cstr1) < 0){
                 cout << "Ingresamos " << cstr2 << " por la izquierda de " << cstr1 << endl;
                 Agregar(Arbol_Binario->izq, Palabra_Ingresada);
             }
@@ -87,9 +88,15 @@ void Inicializar(Estructura &Diccionario)
 {
     cout << "\tInicializando diccionario ..." << endl;
 
+    
     for(int i = 0, j = 97; i < 27 && j < 123; i++, j++){
         Diccionario[i].letra = char(j);
-        cout << "Asignando la letra " << Diccionario[i].letra << endl;
+        cout << "Asignando la letra \"" << Diccionario[i].letra << "\" a la posición " << i << endl;
+
+        if(j == 122){
+            Diccionario[26].letra = char(164);
+            cout << "Asignando la letra \"" << Diccionario[26].letra << "\" a la posición " << 26 << endl;
+        }
     }
 
     cout << "\tDiccionario inicializado." << endl;
@@ -101,12 +108,22 @@ int main()
 
     Inicializar(MiDiccionario);
 
-    int cont = 0;
+    int i;
 
     AgregarPalabra(MiDiccionario);
     AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    AgregarPalabra(MiDiccionario);
+    
 
-    //for(int i = 0; i < 27; i++){
-        printBT(MiDiccionario->Arbolito);
-    //}
+    for(i = 0; i < 27; i++){
+        cout << MiDiccionario[i].letra << endl;
+        printBT(MiDiccionario[i].Arbolito);
+    }
 }
